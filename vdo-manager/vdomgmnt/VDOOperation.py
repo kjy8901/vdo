@@ -39,6 +39,9 @@ from . import ExitStatus, StateExitStatus, SystemExitStatus, UserExitStatus
 from vdo.utils import Command, CommandError, runCommand
 from vdo.utils import Transaction, transactional
 from functools import partial
+from vdo.statistics.VDOMajorVersions import *
+from vdo.statistics.VDOReleaseVersions import *
+from vdo.statistics.VDOStatistics import *
 import inspect
 import logging
 import __main__ as main
@@ -613,10 +616,17 @@ class VersionOperation(VDOOperation):
     super(VersionOperation, self).__init__()
 
   ######################################################################
-  def execute(self, unused_args):
-    kms = VDOKernelModuleService()
-    kms.start()
-    print(kms.version())
+  def execute(self, args):
+    if args.release :
+        print("vdo release version is: {0}.{1}"
+                .format(CURRENT_RELEASE_VERSION_NUMBER,
+                        VDOStatistics.statisticsVersion))
+    else :   
+        print("vdo major version is: {0}"
+                .format(CURRENT_MAJOR_VERSION_NUMBER))
+#    kms = VDOKernelModuleService()
+#    kms.start()
+#    print(kms.version())
 
 ########################################################################
 class OptionToggle(VDOOperation):

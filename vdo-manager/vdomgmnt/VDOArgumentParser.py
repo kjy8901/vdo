@@ -443,6 +443,20 @@ suffix is optional""").format(options
       help = highLevelHelp,
       description = description)
 
+    # version command.
+    highLevelHelp = _("""
+      show vdo version or release version.
+                      """)
+    description = _("""
+      {0}
+                    """).format(highLevelHelp)
+    self._VersionCommandParser = subparserAdder.add_parser(
+      "version",
+      parents = [self._VersionOptionsParser(required = False),
+                 self.__commonOptions],
+      help = highLevelHelp,
+      description = description)
+
   ####################################################################
   # Protected methods
   ####################################################################
@@ -1035,6 +1049,17 @@ suffix is optional""").format(options
                                  """)
       .format(defaultHelp = defaultHelp))
 
+    return parser
+
+  ####################################################################
+  def _VersionOptionsParser(self, required = True):
+    parser = argparse.ArgumentParser(add_help = False)
+    parser.add_argument("--release",
+                        action = "store_true",
+                        dest = "release",
+                        help = _("""
+      Prints for Release Versions.
+                                 """))
     return parser
 
   ####################################################################

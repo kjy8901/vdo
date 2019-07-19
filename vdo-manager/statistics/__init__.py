@@ -32,5 +32,6 @@ from .LabeledValue import LabeledValue
 from .StatFormatter import *
 from .StatStruct import StatStruct
 from .VDOReleaseVersions import *
+from .VDOMajorVersions import *
 from .VDOStatistics import VDOStatistics
 
